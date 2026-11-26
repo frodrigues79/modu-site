@@ -346,3 +346,12 @@ a.service:hover .go .arr{transform:translateX(5px)}
 .hero-mid{padding-top:4vh;padding-bottom:2.2vw}
 @media (max-width:900px){.hero-mid{flex-direction:column;align-items:flex-start;gap:20px;padding-top:40px}.hero-mid .eyes{display:none}}
 @media (prefers-reduced-motion:reduce){.claim,.sub,.hero-cta{opacity:1;transform:none;transition:none}}
+
+/* Hero v3: claim in the top line */
+.topline{grid-template-columns:1fr auto;padding-top:clamp(28px,5vh,56px);align-items:start}
+.topline .intro{max-width:880px}
+.topline .claim{font-size:clamp(36px,5vw,72px)}
+.hero-mid{justify-content:flex-end;align-items:flex-end;padding-top:0}
+.hero-mid .eyes{display:block}
+@media (max-width:900px){.topline{grid-template-columns:1fr}.topline .book{order:-1;justify-self:end}.hero-mid{align-items:flex-end}}
+.topline .sub{font-family:var(--sans)}
