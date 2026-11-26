@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Supplier form | MODU</title>
+<meta name="description" content="Factories and suppliers in Portugal: share your capabilities with MODU's supplier registry.">
+<link rel="canonical" href="https://moduportugal.eu/supplier-form/">
+<meta property="og:title" content="Supplier form | MODU">
+<meta property="og:description" content="Factories and suppliers in Portugal: share your capabilities with MODU.">
+<meta property="og:image" content="https://moduportugal.eu/assets/img/og.png">
+<meta name="theme-color" content="#F5F3EE">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/css/site.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<main id="main">
+  <div class="wrap">
+    <a class="back" href="/">&larr; Home</a>
+    <header class="page-head rv">
+      <p class="label">For factories and suppliers</p>
+      <h1 class="display">Share your <span class="it">capabilities.</span></h1>
+      <p class="lead" style="margin-top:24px">MODU works on the brand's side and takes no commissions from factories. We keep a registry of manufacturers in Portugal and get in touch when a client brief fits what you do.</p>
+    </header>
+
+    <div class="formwrap">
+      <div>
+        <form data-form="supplier" novalidate>
+          <div class="grid">
+            <div class="field"><label for="factory_name">Company name <span class="req">*</span></label><input id="factory_name" name="factory_name" type="text" autocomplete="organization" required></div>
+            <div class="field"><label for="contact_person">Contact person <span class="req">*</span></label><input id="contact_person" name="contact_person" type="text" autocomplete="name" required></div>
+            <div class="field"><label for="email">Email <span class="req">*</span></label><input id="email" name="email" type="email" autocomplete="email" required></div>
+            <div class="field"><label for="phone">Phone</label><input id="phone" name="phone" type="tel" autocomplete="tel"></div>
+            <div class="field"><label for="website">Website</label><input id="website" name="website" type="text" placeholder="company.pt"></div>
+            <div class="field"><label for="location">Location <span class="req">*</span></label><input id="location" name="location" type="text" placeholder="City, district" required></div>
+
+            <fieldset class="field full" data-required>
+              <legend>Segment <span class="req">*</span></legend>
+              <div class="choices">
+                <label><input type="checkbox" name="segment" value="Apparel"> Apparel</label>
+                <label><input type="checkbox" name="segment" value="Home textiles"> Home textiles</label>
+                <label><input type="checkbox" name="segment" value="Leather goods"> Leather goods</label>
+                <label><input type="checkbox" name="segment" value="Accessories"> Accessories</label>
+                <label><input type="checkbox" name="segment" value="Fabrics and trims"> Fabrics and trims</label>
+              </div>
+            </fieldset>
+
+            <div class="field full"><label for="product_speciality">Product speciality <span class="req">*</span></label><input id="product_speciality" name="product_speciality" type="text" placeholder="For example: jersey, tailoring, knitwear, towels, bed linen" required></div>
+
+            <div class="field"><label for="moq">Minimum order per style</label><input id="moq" name="moq" type="text" placeholder="For example: 300 pieces"></div>
+            <div class="field"><label for="monthly_capacity">Monthly capacity</label><input id="monthly_capacity" name="monthly_capacity" type="text" placeholder="For example: 20,000 pieces"></div>
+
+            <fieldset class="field full">
+              <legend>Certifications</legend>
+              <div class="choices">
+                <label><input type="checkbox" name="certifications" value="GOTS"> GOTS</label>
+                <label><input type="checkbox" name="certifications" value="OEKO-TEX"> OEKO-TEX</label>
+                <label><input type="checkbox" name="certifications" value="GRS"> GRS</label>
+                <label><input type="checkbox" name="certifications" value="amfori BSCI"> amfori BSCI</label>
+                <label><input type="checkbox" name="certifications" value="SA8000"> SA8000</label>
+                <label><input type="checkbox" name="certifications" value="ISO 9001"> ISO 9001</label>
+                <label><input type="checkbox" name="certifications" value="Other"> Other</label>
+              </div>
+            </fieldset>
+
+            <div class="field full"><label for="notes">Anything else we should know?</label><textarea id="notes" name="notes" placeholder="Machinery, processes in-house, brands you work with (if public), languages."></textarea></div>
+
+            <label class="consent full"><input type="checkbox" name="consent" value="yes" required> <span>I agree that MODU stores these details in its supplier registry and contacts me about relevant briefs. See the <a class="link" href="/privacy/">privacy notice</a>.</span></label>
+            <div class="hp" aria-hidden="true"><label>Leave empty <input type="text" name="company_website" tabindex="-1" autocomplete="off"></label></div>
+          </div>
+          <div class="form-actions">
+            <button class="btn btn-primary" type="submit">Send</button>
+            <span class="status" role="status" aria-live="polite"></span>
+          </div>
+        </form>
+
+        <div class="done" id="supplier-done" tabindex="-1">
+          <h2>Thank you.</h2>
+          <p class="muted" style="margin:0">Your details are in our registry. We will contact you when a client brief fits your capabilities.</p>
+        </div>
+      </div>
+
+      <aside class="aside rv">
+        <h3>How MODU works with factories</h3>
+        <ol>
+          <li>We work for brands, on the buyer side.</li>
+          <li>We take no commissions and no referral fees.</li>
+          <li>We contact you only when a real brief fits.</li>
+        </ol>
+      </aside>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div class="brand">MODU <span class="dots"><i class="g"></i><i class="a"></i><i class="r"></i></span> <small>ACT LOCALLY</small></div>
+      <nav aria-label="Footer"><a href="/">Home</a><a href="/start/">Book a call</a><a href="/privacy/">Privacy</a></nav>
+    </div>
+    <p class="legal">MODU is operated by HOUSE 05, Unipessoal Lda, Porto, Portugal. &copy; <span id="year">2026</span></p>
+  </div>
+</footer>
+<div class="bar">
+  <a class="home" href="/" aria-label="MODU home">MODU <span class="dots"><i class="g"></i><i class="a"></i><i class="r"></i></span></a>
+  <a class="cta" href="/">Home <span class="plus">&larr;</span></a>
+</div>
+<script src="/js/site.js" defer></script>
+</body>
+</html>
