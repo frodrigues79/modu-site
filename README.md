@@ -1,7 +1,7 @@
 # moduportugal.eu
 
 Static site for MODU (HOUSE 05, Unipessoal Lda). Plain HTML, CSS and JavaScript, no build step.
-Hosted on Cloudflare Pages: every push to `main` is published automatically.
+Hosted on Cloudflare (Workers static assets, config in `wrangler.jsonc`): every push to `main` is published automatically.
 
 ## Structure
 
