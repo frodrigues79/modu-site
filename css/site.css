@@ -355,3 +355,4 @@ a.service:hover .go .arr{transform:translateX(5px)}
 .hero-mid .eyes{display:block}
 @media (max-width:900px){.topline{grid-template-columns:1fr}.topline .book{order:-1;justify-self:end}.hero-mid{align-items:flex-end}}
 .topline .sub{font-family:var(--sans)}
+.topline .claim{font-size:clamp(20px,2.5vw,36px);font-weight:500;line-height:1.15}
