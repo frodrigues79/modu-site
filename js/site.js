@@ -5,8 +5,8 @@
   // Form endpoints: Google Apps Script web app URLs (see /apps-script/README.md).
   // Leave empty until the scripts are deployed; the forms then show a notice instead of sending.
   var ENDPOINTS = {
-    client: "",
-    supplier: ""
+    client: "https://script.google.com/macros/s/AKfycbzE1r6EriVHgGuQEYRFLgD0UQfWa144a05KRYFNURHIX6S-CcPwhw9oAq6VRPG7ASTs/exec",
+    supplier: "https://script.google.com/macros/s/AKfycbxs4q9IJjBpXxayaqcv2SgP7GZN4eeV_bnU4VCkotorho48R6pOg2d2gkrUd-UEzPBOQw/exec"
   };
   var CALENDLY = "https://calendly.com/modu-house05/production-fit-call-30-min";
 
