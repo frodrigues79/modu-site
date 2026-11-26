@@ -15,12 +15,103 @@
   // Hero wordmark entrance
   requestAnimationFrame(function () { document.documentElement.classList.add("loaded"); });
 
+  // Split headings into words (keeps inner spans such as italics)
+  function splitWords(root, cls, counter) {
+    Array.prototype.slice.call(root.childNodes).forEach(function (n) {
+      if (n.nodeType === 3) {
+        var frag = document.createDocumentFragment();
+        n.textContent.split(/(\s+)/).forEach(function (part) {
+          if (!part) return;
+          if (/^\s+$/.test(part)) { frag.appendChild(document.createTextNode(part)); return; }
+          var s = document.createElement("span");
+          s.className = cls; s.textContent = part;
+          s.style.setProperty("--i", counter.n++);
+          frag.appendChild(s);
+        });
+        n.parentNode.replaceChild(frag, n);
+      } else if (n.nodeType === 1) {
+        splitWords(n, cls, counter);
+      }
+    });
+  }
+  if (!reduce) {
+    document.querySelectorAll(".split").forEach(function (h) { splitWords(h, "w", { n: 0 }); });
+  }
+  var quoteWords = [];
+  document.querySelectorAll(".hl").forEach(function (q) {
+    if (reduce) return;
+    splitWords(q, "qw", { n: 0 });
+    quoteWords = quoteWords.concat(Array.prototype.slice.call(q.querySelectorAll(".qw")));
+  });
+
+  // Count-up for facts (final numbers stay in the HTML for search engines)
+  function countUp(el) {
+    var end = parseInt(el.getAttribute("data-count"), 10), suf = el.getAttribute("data-suffix") || "";
+    if (reduce || !end) return;
+    var t0 = null;
+    function step(t) {
+      if (!t0) t0 = t;
+      var k = Math.min(1, (t - t0) / 1200), e = 1 - Math.pow(1 - k, 3);
+      el.textContent = Math.round(end * e) + suf;
+      if (k < 1) requestAnimationFrame(step);
+    }
+    el.textContent = "0" + suf;
+    requestAnimationFrame(step);
+  }
+
+  // Scroll-linked effects
+  var wm = document.getElementById("wm");
+  var wmLetters = wm ? wm.querySelectorAll("span") : [];
+  var topline = document.querySelector(".topline");
+  var stepsLine = document.querySelector(".steps-line");
+  var portraitImg = document.querySelector(".portrait img");
+  var bar = document.querySelector(".bar");
+  var ticking = false;
+  function onScroll() {
+    ticking = false;
+    var y = window.scrollY, vh = window.innerHeight;
+    var docH = document.documentElement.scrollHeight - vh;
+    if (bar) bar.style.setProperty("--sp", docH > 0 ? (y / docH).toFixed(4) : 0);
+    if (reduce) return;
+    if (wm && y < vh * 1.2) {
+      var k = y / vh;
+      for (var i = 0; i < wmLetters.length; i++) {
+        wmLetters[i].style.transform = document.documentElement.classList.contains("loaded")
+          ? "translateY(" + (k * (40 + i * 38)).toFixed(1) + "px)" : "";
+      }
+      if (topline) topline.style.opacity = Math.max(0, 1 - k * 1.6).toFixed(3);
+    }
+    if (stepsLine) {
+      var r = stepsLine.parentNode.getBoundingClientRect();
+      var p = Math.min(1, Math.max(0, (vh * 0.85 - r.top) / (r.height + vh * 0.35)));
+      stepsLine.style.setProperty("--p", p.toFixed(3));
+    }
+    if (portraitImg) {
+      var pr = portraitImg.parentNode.getBoundingClientRect();
+      var c = (pr.top + pr.height / 2 - vh / 2) / vh;
+      portraitImg.style.setProperty("--py", (c * -30).toFixed(1) + "px");
+    }
+    if (quoteWords.length) {
+      var qr = quoteWords[0].parentNode.getBoundingClientRect();
+      var qp = Math.min(1, Math.max(0, (vh * 0.8 - qr.top) / (qr.height + vh * 0.25)));
+      var lit = Math.round(qp * quoteWords.length);
+      for (var j = 0; j < quoteWords.length; j++) quoteWords[j].classList.toggle("on", j < lit);
+    }
+  }
+  window.addEventListener("scroll", function () {
+    if (!ticking) { ticking = true; requestAnimationFrame(onScroll); }
+  }, { passive: true });
+  window.addEventListener("resize", onScroll);
+  // After the entrance, let the wordmark letters follow the scroll without delay
+  setTimeout(function () { wmLetters.forEach && wmLetters.forEach(function (s) { s.style.transitionDelay = "0s"; s.style.transition = "transform .1s linear"; }); onScroll(); }, 1300);
+  onScroll();
+
   // Reveal on scroll
   var els = document.querySelectorAll(".rv");
   if (!reduce && "IntersectionObserver" in window) {
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) {
-        if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
+        if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); e.target.querySelectorAll("[data-count]").forEach(countUp); }
       });
     }, { rootMargin: "0px 0px -8% 0px", threshold: 0.08 });
     els.forEach(function (el) { io.observe(el); });

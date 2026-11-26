@@ -254,3 +254,93 @@ fieldset{border:0;padding:0;margin:0}
 .about img{height:auto}
 .dots{display:inline-flex;gap:5px;align-items:center}
 @media (max-width:900px){ .vids .more{aspect-ratio:auto;min-height:160px} .about figure{width:min(220px,60vw)} }
+
+/* ---------- Motion layer ---------- */
+/* Marquee */
+.marquee{overflow:hidden;border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:var(--surface);padding:18px 0}
+.marquee .track{display:flex;gap:56px;width:max-content;animation:marq 38s linear infinite}
+.marquee span{font-family:var(--display);font-size:clamp(22px,2.4vw,34px);white-space:nowrap;display:flex;align-items:center;gap:56px;color:var(--text)}
+.marquee span::after{content:"";width:9px;height:9px;border-radius:50%;background:var(--border-strong)}
+.marquee span:nth-child(4n+1)::after{background:var(--green)}
+.marquee span:nth-child(4n+2)::after{background:var(--amber)}
+.marquee:hover .track{animation-play-state:paused}
+@keyframes marq{to{transform:translateX(-50%)}}
+
+/* Word-by-word headings */
+.split .w{display:inline-block;opacity:0;transform:translateY(.45em);transition:opacity .7s var(--ease),transform .7s var(--ease);transition-delay:calc(var(--i) * 45ms)}
+.split.in .w,.in .split .w{opacity:1;transform:none}
+
+/* Staggered lists */
+.stagger li,.stagger-kids>*{opacity:0;transform:translateY(14px);transition:opacity .6s var(--ease),transform .6s var(--ease)}
+.in .stagger li,.stagger.in li,.stagger-kids.in>*{opacity:1;transform:none}
+.stagger li:nth-child(2),.stagger-kids>*:nth-child(2){transition-delay:.15s}
+.stagger li:nth-child(3),.stagger-kids>*:nth-child(3){transition-delay:.3s}
+.stagger li:nth-child(4){transition-delay:.6s}
+.gaps li{position:relative}
+.gaps li::after{content:"";position:absolute;left:0;bottom:-1px;height:1px;width:0;background:var(--text);transition:width .9s var(--ease) .2s}
+.in .gaps li::after{width:100%}
+.in .gaps li.fail::after{background:var(--accent)}
+.gaps li.fail::before{animation:none}
+.in .gaps li.fail::before{animation:pulse 1.6s ease-out .9s 2}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(194,73,59,.45)}100%{box-shadow:0 0 0 10px rgba(194,73,59,0)}}
+
+/* Principles hover */
+.principle{padding-top:18px;border-top:1px solid var(--border);position:relative}
+.principle::before{content:"";position:absolute;left:0;top:-1px;height:2px;width:0;background:var(--pine);transition:width .5s var(--ease)}
+.principle:hover::before{width:100%}
+.principle h3{transition:transform .35s var(--ease)}
+.principle:hover h3{transform:translateX(6px)}
+
+/* Services hover */
+a.service{text-decoration:none;color:inherit;position:relative;overflow:hidden}
+a.service::after{content:"";position:absolute;left:0;bottom:0;height:3px;width:100%;background:var(--pine);transform:scaleX(0);transform-origin:left;transition:transform .45s var(--ease)}
+a.service:hover::after,a.service:focus-visible::after{transform:scaleX(1)}
+a.service h3{transition:transform .4s var(--ease)}
+a.service:hover h3{transform:translateX(8px)}
+.service .go{font-size:14px;font-weight:500;color:var(--pine);display:inline-flex;gap:8px;align-items:center;opacity:0;transform:translateY(6px);transition:opacity .3s var(--ease),transform .3s var(--ease)}
+a.service:hover .go,a.service:focus-visible .go{opacity:1;transform:none}
+.service .go .arr{transition:transform .3s var(--ease)}
+a.service:hover .go .arr{transform:translateX(5px)}
+@media (hover:none){.service .go{opacity:1;transform:none}}
+
+/* Steps line drawn on scroll */
+.steps{position:relative;border-top-color:var(--border)}
+.steps-line{position:absolute;left:0;top:-2px;height:2px;width:100%;background:var(--text);transform:scaleX(var(--p,0));transform-origin:left}
+.step .n{transition:color .6s var(--ease)}
+.step.in .n{color:var(--pine)}
+
+/* Portrait */
+.portrait{overflow:hidden}
+.portrait img{transform:scale(1.08) translateY(var(--py,0px));transition:filter .5s var(--ease);filter:grayscale(1) contrast(1.05)}
+.portrait:hover img{filter:none}
+
+/* Quote: words light up as you scroll */
+.hl .qw{color:var(--border-strong);transition:color .25s linear}
+.hl .qw.on{color:var(--text)}
+
+/* Buttons and links */
+.btn .plus{transition:transform .3s var(--ease)}
+.btn:hover .plus{transform:rotate(90deg)}
+.link{background:linear-gradient(currentColor,currentColor) 0 100%/0 1px no-repeat;text-decoration:none;transition:background-size .35s var(--ease)}
+.link:hover{background-size:100% 1px}
+.bar .cta .plus{transition:transform .3s var(--ease)}
+.bar .cta:hover .plus{transform:rotate(90deg)}
+.bar::before{content:"";position:absolute;left:0;top:-1px;height:2px;width:100%;background:var(--pine);transform:scaleX(var(--sp,0));transform-origin:left}
+.yt{transition:transform .4s var(--ease)}
+.yt:hover{transform:translateY(-4px)}
+.vids .more{transition:border-color .3s var(--ease),background .3s var(--ease)}
+.vids .more:hover{border-color:var(--pine);background:var(--surface)}
+.faq summary{transition:padding .3s var(--ease),color .2s}
+.faq summary:hover{padding-left:8px;color:var(--pine)}
+.topline > div{transition:opacity .2s linear}
+
+@media (prefers-reduced-motion:reduce){
+  .marquee .track{animation:none}
+  .split .w,.stagger li,.stagger-kids>*{opacity:1;transform:none;transition:none}
+  .steps-line{transform:none}
+  .portrait img{transform:none}
+  .hl .qw{color:inherit}
+  .gaps li::after{display:none}
+}
+.cols3 .rv:nth-child(2),.steps .rv:nth-child(3){transition-delay:.12s}
+.cols3 .rv:nth-child(3),.steps .rv:nth-child(4){transition-delay:.24s}
